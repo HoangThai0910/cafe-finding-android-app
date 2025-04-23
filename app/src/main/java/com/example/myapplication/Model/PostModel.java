@@ -10,8 +10,12 @@ public class PostModel {
     public String image;
     public int likeCount;
     public List<String> comments;
-
-    public PostModel(int id, String content, String userName, String userAvatar, String image, int likeCount) {
+    public String timePosted;
+    public String avatarUri;
+    public List<String> imageList;
+    public int commentCount;
+    public boolean isLiked = false;
+    public PostModel(int id, String content, String userName, String userAvatar, String image, int likeCount,boolean isLiked) {
         this.id = id;
         this.content = content;
         this.userName = userName;
@@ -19,32 +23,26 @@ public class PostModel {
         this.image = image;
         this.likeCount = likeCount;
         this.comments = new ArrayList<>();
+        this.isLiked = isLiked;
     }
-
     public int getId() {
         return id;
     }
-
     public String getUserAvatar() {
         return userAvatar;
     }
-
     public String getContent() {
         return content;
     }
-
     public String getUserName() {
         return userName;
     }
-
     public List<String> getComments() {
         return comments;
     }
-
     public int getLikeCount() {
         return likeCount;
     }
-
     public String getImage() {
         return image;
     }

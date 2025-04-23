@@ -71,15 +71,16 @@ public class DBHandler extends SQLiteOpenHelper {
     private void insertSampleData(SQLiteDatabase db) {
         // Insert sample users
         db.execSQL("INSERT INTO users (name, email, password, img) VALUES ('chinh', 'chinh31503@gmail.com', 'chinh31503', 'avatar.png');");
-        db.execSQL("INSERT INTO users (name, email, password, img) VALUES ('Jane Doe', 'jane@example.com', '1234', 'jane.png');");
+        db.execSQL("INSERT INTO users (name, email, password, img) VALUES ('thai', 'hvt@gmail.com', 'hvt', 'avatar.png');");
 
         // Insert sample cafes
         db.execSQL("INSERT INTO cafes (name, lat, lon, address, wifi_available, work_space, open_hours, close_hours, phone, min_price, img, description, rating, total_rating) VALUES ('Cafe A', 10.123, 106.456, '123 Street', 1, 1, '08:00', '22:00', '0123456789', 2.5, 'cafea.png', 'Nice place', 4, 100);");
         db.execSQL("INSERT INTO cafes (name, lat, lon, address, wifi_available, work_space, open_hours, close_hours, phone, min_price, img, description, rating, total_rating) VALUES ('Cafe B', 10.789, 106.789, '456 Street', 1, 0, '09:00', '23:00', '0987654321', 3.0, 'cafeb.png', 'Cozy atmosphere', 5, 200);");
 
         // Insert sample posts
-        db.execSQL("INSERT INTO post (id_user, content) VALUES (1, 'Great cafe!');");
-        db.execSQL("INSERT INTO post (id_user, content) VALUES (2, 'Nice ambiance!');");
+        db.execSQL("INSERT INTO post (id_user, content) VALUES (1, 'Xin review các quán cafe gần trường PTIT. Quán nào có không gian để học, giá học sinh sinh viên thì càng tốt');");
+        db.execSQL("INSERT INTO post (id_user, content) VALUES (2, 'Recommend cho mọi người quán cafe ABC giá học sinh sinh viên. Địa chỉ quán tại: ...');");
+        db.execSQL("INSERT INTO post (id_user, content) VALUES (3, 'Nice ambiance!');");
 
         // Insert sample interactions
         db.execSQL("INSERT INTO interact (id_post, id_user, likes, comment) VALUES (1, 2, 1, 'I love this!');");
@@ -107,31 +108,5 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public List<PostModel> getAllPosts() {
-        List<PostModel> list = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
 
-        String query = "SELECT p.id, p.content, u.name, u.img AS avatar, pi.img AS post_img " +
-                "FROM post p " +
-                "JOIN users u ON p.id_user = u.id " +
-                "LEFT JOIN post_image pi ON pi.id_post = p.id " +
-                "ORDER BY p.id DESC";
-
-        Cursor c = db.rawQuery(query, null);
-        if (c.moveToFirst()) {
-            do {
-                PostModel post = new PostModel(
-                        c.getInt(0),
-                        c.getString(1),
-                        c.getString(2),
-                        c.getString(3),
-                        c.getString(4),
-                        0
-                );
-                list.add(post);
-            } while (c.moveToNext());
-        }
-        c.close();
-        return list;
-    }
 }

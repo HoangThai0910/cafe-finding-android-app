@@ -54,7 +54,7 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.CafeViewHolder
         if (favoriteCafes.contains(cafe.getName())) {
             holder.btnFavorite.setImageResource(R.drawable.red_heart); // Biểu tượng tym đã chọn
         } else {
-            holder.btnFavorite.setImageResource(R.drawable.blank_heart); // Biểu tượng tym trống
+            holder.btnFavorite.setImageResource(R.drawable.ic_heart_outline); // Biểu tượng tym trống
         }
 
         // Xử lý khi nhấn vào nút tym
@@ -64,7 +64,7 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.CafeViewHolder
                 holder.btnFavorite.setImageResource(R.drawable.red_heart);
             } else {
                 favoriteCafes.add(cafe.getName());
-                holder.btnFavorite.setImageResource(R.drawable.blank_heart);
+                holder.btnFavorite.setImageResource(R.drawable.ic_heart_outline);
             }
         });
     }

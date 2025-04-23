@@ -57,4 +57,19 @@ public class UserDAO {
             db.close();
         }
     }
+
+    public int getUserIdByEmail(String email) {
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT id FROM users WHERE email = ?", new String[]{email});
+
+        try {
+            if (cursor.moveToFirst()) {
+                return cursor.getInt(0);
+            }
+            return -1; // Không tìm thấy
+        } finally {
+            cursor.close();
+            db.close();
+        }
+    }
 }
